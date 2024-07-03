@@ -32,7 +32,24 @@ def sync_I_const(freq,spectral_index: float=3.):
     
     p = freq*temp_covert
     
-    return consts*kpc*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))/2
+    return consts*kpc*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
+
+@jax.jit
+def sync_P_const(freq,spectral_index: float=3.):
+    
+    gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
+    
+    gamma_func_2_process = (2e-4*B_converter)**(spectral_index/2.+0.5)/(4.)*jax.scipy.special.gamma(spectral_index/4+7/12.)# the transition from micro-Gauss to tesla is here.
+    
+    omega = 2*jnp.pi*freq*1e9
+    
+    freq_irrelavent = freq_irrelavent_const/(2*const.Boltzmann*freq**2*1e18/(const.speed_of_light**2))
+    
+    consts = freq_irrelavent*(omega*elect_combi)**(0.5-spectral_index/2)*gamma_func_1*gamma_func_2_process
+    
+    p = freq*temp_covert
+    
+    return consts*kpc*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
 
 @jax.jit
 def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
@@ -47,6 +64,20 @@ def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float
     
 
     return b_perp**(0.5+spectral_index*0.5)*C*sync_I_const(freq,spectral_index=spectral_index)
+
+@jax.jit
+def sync_emiss_P(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
+    # calculating the  synchrotron emissivity 
+    # Input:
+    #   freq (float): frequency to be computed.
+    #   b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
+    #   C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+    #   spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+    # Output:
+    #   j (jax.Array): parallel emissivity for the synchrotron emission.
+    
+
+    return b_perp**(0.5+spectral_index*0.5)*C*sync_P_const(freq,spectral_index=spectral_index)
 
 
 
@@ -72,3 +103,32 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
     
     return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl
 
+@jax.jit
+def C_page(x:float,y:float,z:float,C0:float = 1.,hr:float=5,hd:float=1):
+    #x = x
+    #z = z
+    #c = (x**2+y**2+z**2)/jnp.max(jnp.array([x**2+y**2+z**2,9.]))+1e-7
+    
+    return C0*jnp.exp(-jnp.sqrt(x**2+y**2)/hr)/jnp.cosh(z/hd)**2#*(1-jnp.floor(c))
+
+
+def C_uni(x:float,y:float,z:float,C0:float = 1.,):
+    x = x+8.3
+    z = z-0.006
+    c = (x**2+y**2+z**2)/jnp.max(jnp.array([x**2+y**2+z**2,16.]))#+1e-7
+    return 1-jnp.floor(c)
+
+R_obs = (8.3**2+0.006**2)**0.5
+
+def C_sun(x:float,y:float,z:float,C0:float = 6.4e1,):
+    z = jnp.abs(z)
+    factor1 = 1-jnp.floor(z/jnp.max(jnp.array([z,1])))
+    R = (x**2+y**2)**0.5
+    C = C0*jnp.exp(-(R-R_obs)/8-z)
+    
+    return factor1*C
+
+C_earth = C_page(-8.3,0,0.006)
+C_page_vmap = jax.vmap(lambda x,y,z:C_page(x,y,z))
+C_uni_vmap = jax.vmap(lambda x,y,z:C_uni(x,y,z))
+C_sun_vmap = jax.vmap(lambda x,y,z:C_sun(x,y,z))
