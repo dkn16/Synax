@@ -101,7 +101,29 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
     
     dl = (xs[0]**2+ys[0]**2+zs[0]**2)**0.5*2
     
-    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl
+    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl,jnp.array([nx,ny,nz])
+
+# obtaining integration locations
+@partial(jax.jit, static_argnums=(2,3,4,5,6,7))
+def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=4,y_length:float=4,z_length:float=4,num_int_points:int=256,epsilon:float=1e-7):
+    
+    nx = jnp.sin(theta)*jnp.cos(phi)
+    ny = jnp.sin(theta)*jnp.sin(phi)
+    nz = jnp.cos(theta)
+    
+    #max_val = jnp.max(jnp.abs(jnp.array([nx/(x_length-obs_coord[0]*jnp.sign(nx)),ny/(y_length-obs_coord[1]*jnp.sign(ny)),nz/(z_length-obs_coord[2]*jnp.sign(nz))])))
+    
+    int_points,step = jnp.linspace(0,1,num_int_points,endpoint=False,retstep=True)
+    
+    int_points = int_points + step*0.5
+    
+    xs = x_length*int_points*nx#+obs_coord[0]
+    ys = y_length*int_points*ny#+obs_coord[1]
+    zs = z_length*int_points*nz#+obs_coord[2]
+    
+    dl = (xs[0]**2+ys[0]**2+zs[0]**2)**0.5*2
+    
+    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl,jnp.array([nx,ny,nz])
 
 @jax.jit
 def C_page(x:float,y:float,z:float,C0:float = 1.,hr:float=5,hd:float=1):
