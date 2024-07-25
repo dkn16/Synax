@@ -4,7 +4,7 @@ setup(
     name='synax',  # This is the name of your package
     version='0.1.0',  # Version number
     packages=find_packages(),  # Automatically find packages in the directory
-    install_requires=['jax','numpy','scipy'],  # List any dependencies your package requires
+    install_requires=['jax','numpy','scipy','interpax','healpy'],  # List any dependencies your package requires
     author='Kangning Diao, Zack Li, Richard D.P. Grumitt',  # Your name
     author_email='dkn16@foxmail.com',  # Your email
     description='A brief description of your package',

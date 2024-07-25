@@ -1,14 +1,10 @@
-import os
-import sys
-import jax
+# synax/bfield.py
+
+import jax,interpax
 jax.config.update("jax_enable_x64", True)
 
-import synax
+
 import jax.numpy as jnp
-import interpax
-import healpy as hp
-import numpy as np
-import matplotlib.pyplot as plt
 from functools import partial
 import scipy.constants as const
 from typing import List, Tuple, Union,Dict
@@ -32,6 +28,7 @@ class B_jf12:
         self.rho = (coords[0]**2+coords[1]**2+coords[2]**2)**(1/2)
         self.r = (coords[0]**2+coords[1]**2)**(1/2)
         self.z = coords[2]
+        self.shape = coords[2].shape
         self.phi = jnp.arctan2(coords[1],coords[0])
         self.indexs = self.get_index_vmap(self.r.reshape(-1),self.phi.reshape(-1),self.z.reshape(-1))
         
@@ -110,7 +107,7 @@ class B_jf12:
         bv_b = bv_b.at[7].set(b8)
 
         disk_values = jnp.take(bv_b,self.indexs)
-        B_field = self.B_calc_vmap(jf12_params,self.r.reshape(-1),self.phi.reshape(-1),self.z.reshape(-1),self.rmin_mask.reshape(-1),self.rcent_mask.reshape(-1),disk_values.reshape(-1),self.total_mask.reshape(-1))
+        B_field = self.B_calc_vmap(jf12_params,self.r.reshape(-1),self.phi.reshape(-1),self.z.reshape(-1),self.rmin_mask.reshape(-1),self.rcent_mask.reshape(-1),disk_values.reshape(-1),self.total_mask.reshape(-1)).reshape(self.shape + (3,))
         return B_field*1e-6
     
     
@@ -159,6 +156,7 @@ class B_lsa():
         self.sin_p = coords[1]/self.r
         
         self.z = coords[2]
+        self.shape = coords[2].shape
         
         ones_field = jnp.ones_like(coords[0])
         mask = (self.r<3)|(self.r>20.)
@@ -178,7 +176,7 @@ class B_lsa():
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,lsa_params):
         
-        return self.B_calc_vmap(lsa_params,self.r.reshape(-1),self.z.reshape(-1),self.cos_p.reshape(-1),self.sin_p.reshape(-1),self.total_mask.reshape(-1))*1e-6
+        return (self.B_calc_vmap(lsa_params,self.r.reshape(-1),self.z.reshape(-1),self.cos_p.reshape(-1),self.sin_p.reshape(-1),self.total_mask.reshape(-1))*1e-6).reshape(self.shape+  (3,))
     
     def __str__(self):
         """
@@ -191,3 +189,42 @@ class B_lsa():
         Official string representation of the instance
         """
         return f'B_lsa'
+
+
+class B_grid():
+    
+    class_attribute = 'I am a class attribute'
+
+    def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]],coords_field:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
+        
+        self.x = coords[0] 
+        self.y = coords[1] 
+        self.z = coords[2]
+        self.pos = coords
+
+        self.xf = coords_field[0] 
+        self.yf = coords_field[1] 
+        self.zf = coords_field[2]
+
+        self.shape = coords[2].shape
+        
+        B_calc_vmap = jax.vmap(lambda pos,B_field: interpax.interp3d(pos[0].reshape(-1),pos[1].reshape(-1),pos[2].reshape(-1),self.xf,self.yf,self.zf,B_field,method='linear',extrap=True),in_axes=(0,None))
+        setattr(self, 'TE_calc_vmap', B_calc_vmap)
+
+    
+    @partial(jax.jit, static_argnums=(0,))
+    def TE_field(self,te_grid_field):
+        
+        return self.B_calc_vmap(self.pos,te_grid_field).reshape(self.shape+(3,))
+    
+    def __str__(self):
+        """
+        String representation of the instance
+        """
+        return f'TE_grid'
+
+    def __repr__(self):
+        """
+        Official string representation of the instance
+        """
+        return f'TE_grid'
