@@ -28,14 +28,14 @@ class TE_grid():
 
         self.shape = coords[2].shape
         
-        TE_calc = lambda pos,TE_field: interpax.interp3d(pos[0].reshape(-1),pos[1].reshape(-1),pos[2].reshape(-1),self.xf,self.yf,self.zf,TE_field,method='linear',extrap=True)
-        setattr(self, 'TE_calc_vmap', TE_calc)
+        field_calc = lambda pos,field: interpax.interp3d(pos[0].reshape(-1),pos[1].reshape(-1),pos[2].reshape(-1),self.xf,self.yf,self.zf,field,method='linear',extrap=True)
+        setattr(self, 'field_calc', field_calc)
 
     
     @partial(jax.jit, static_argnums=(0,))
-    def TE_field(self,te_grid_field):
+    def TE_field(self,te_field_grid):
         
-        return self.TE_calc(self.pos,te_grid_field).reshape(self.shape)
+        return self.field_calc(self.pos,te_field_grid).reshape(self.shape)
     
     def __str__(self):
         """

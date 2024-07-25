@@ -208,23 +208,23 @@ class B_grid():
 
         self.shape = coords[2].shape
         
-        B_calc_vmap = jax.vmap(lambda pos,B_field: interpax.interp3d(pos[0].reshape(-1),pos[1].reshape(-1),pos[2].reshape(-1),self.xf,self.yf,self.zf,B_field,method='linear',extrap=True),in_axes=(0,None))
-        setattr(self, 'TE_calc_vmap', B_calc_vmap)
+        field_calc = lambda pos,field: interpax.interp3d(pos[0].reshape(-1),pos[1].reshape(-1),pos[2].reshape(-1),self.xf,self.yf,self.zf,field,method='linear',extrap=True)
+        setattr(self, 'field_calc', field_calc)
 
     
     @partial(jax.jit, static_argnums=(0,))
-    def TE_field(self,te_grid_field):
+    def B_field(self,B_field_grid):
         
-        return self.B_calc_vmap(self.pos,te_grid_field).reshape(self.shape+(3,))
+        return self.field_calc(self.pos,B_field_grid).reshape(self.shape+(3,))
     
     def __str__(self):
         """
         String representation of the instance
         """
-        return f'TE_grid'
+        return f'B_grid'
 
     def __repr__(self):
         """
         Official string representation of the instance
         """
-        return f'TE_grid'
+        return f'B_grid'
