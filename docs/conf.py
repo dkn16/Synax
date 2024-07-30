@@ -2,6 +2,10 @@
 #
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../synax'))
+
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -22,6 +26,14 @@ extensions = ['sphinx.ext.autodoc',  # Automatically document docstrings
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'private-members': False,
+    'special-members': '__init__',
+    'inherited-members': True,
+    'show-inheritance': True,
+}
 
 
 # -- Options for HTML output -------------------------------------------------

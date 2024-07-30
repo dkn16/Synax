@@ -9,8 +9,6 @@ Synax documentation
 Welcome to Synax's documentation!
 =================================
 
-Contents:
-
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
@@ -18,12 +16,5 @@ Contents:
    source/installation
    source/usage
    source/api
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 

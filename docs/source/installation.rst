@@ -9,8 +9,3 @@ To install the `synax` package, follow these steps:
    .. code-block:: bash
 
       pip install synax
-
-Usage Guide
-===========
-
-Here’s how to use the `synax` package...
