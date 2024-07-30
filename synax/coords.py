@@ -1,6 +1,6 @@
 
 import jax.numpy as jnp
-import jax
+import jax,math
 import numpy as np
 import healpy as hp
 from functools import partial

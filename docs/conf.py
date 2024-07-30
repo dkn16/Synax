@@ -35,7 +35,7 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 
-autodoc_mock_imports = ["jax",'numpy','healpy','interpax','scipy']
+autodoc_mock_imports = ["jax",'healpy','interpax']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
