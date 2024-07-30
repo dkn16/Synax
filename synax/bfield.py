@@ -10,16 +10,18 @@ import scipy.constants as const
 from typing import List, Tuple, Union,Dict
 
 class B_jf12:
-    # Class attributes (shared by all instances)
-    class_attribute = 'I am a class attribute'
-
-    def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
-        """
+    """
         Initializer method (constructor)
         Args:
             instance_attribute: Attribute unique to each instance
         """
         # Instance attributes (unique to each instance)
+
+    # Class attributes (shared by all instances)
+    #class_attribute = 'I am a class attribute'
+
+    def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
+        
         get_index_vmap = jax.vmap(self.get_index)
 
         # Add it as an instance method

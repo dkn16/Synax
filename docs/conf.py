@@ -31,8 +31,8 @@ autodoc_default_options = {
     'undoc-members': True,
     'private-members': False,
     'special-members': '__init__',
-    'inherited-members': True,
-    'show-inheritance': True,
+    'inherited-members': False,
+    'show-inheritance': False,
 }
 
 autodoc_mock_imports = ["jax",'healpy','interpax']
