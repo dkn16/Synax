@@ -8,7 +8,16 @@ import scipy.constants as const
 # obtaining integration locations
 @partial(jax.jit, static_argnums=(2,3,4,5,6,7))
 def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=20,y_length:float=20,z_length:float=5,num_int_points:int=512,epsilon:float=1e-7):
-    
+    """
+    Calculate the integration points along one line of sight.
+
+    Args:
+        theta (float): The galactic 
+        phi (float): The second number.
+
+    Returns:
+        jnp.Array: 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
+    """
     nx = jnp.sin(theta)*jnp.cos(phi)
     ny = jnp.sin(theta)*jnp.sin(phi)
     nz = jnp.cos(theta)
@@ -30,7 +39,16 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
 # obtaining integration locations
 @partial(jax.jit, static_argnums=(2,3,4,5,6,7))
 def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=4,y_length:float=4,z_length:float=4,num_int_points:int=256,epsilon:float=1e-7):
-    
+    """
+    Calculate the integration points along one line of sight in hammurabi way. Unlike integrate to the box boundary, now we integrate to a certain distance (x_length,y_length,z_length) way from observer.
+
+    Args:
+        theta (float): The galactic 
+        phi (float): The second number.
+
+    Returns:
+        jnp.Array: 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
+    """
     nx = jnp.sin(theta)*jnp.cos(phi)
     ny = jnp.sin(theta)*jnp.sin(phi)
     nz = jnp.cos(theta)
@@ -52,6 +70,8 @@ def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006
 #obtain_vmap = jax.vmap(obtain_positions,in_axes=(0,0,None,None,None,None,None,None))
 
 def get_healpix_positions(nside = 64,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=20,y_length:float=20,z_length:float=5,num_int_points:int=512,epsilon:float=1e-7):
+    
+    
     obtain_vmap = jax.vmap(lambda theta,phi:obtain_positions(theta,phi,obs_coord = obs_coord,x_length=x_length,y_length=y_length,z_length=z_length,num_int_points=num_int_points,epsilon=epsilon))
     n_pixs = np.arange(0,12*nside**2)
     theta,phi = hp.pix2ang(nside,n_pixs)
