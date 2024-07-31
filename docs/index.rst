@@ -22,8 +22,8 @@ Welcome to Synax's documentation!
    :caption: Examples:
    :hidden:
 
-   examples/Integration.ipynb
-   examples/Field.ipynb
+   ../examples/Integration.ipynb
+   ../examples/Field.ipynb
 
 .. toctree::
    :hidden:
