@@ -48,7 +48,7 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
 @partial(jax.jit, static_argnums=(2,3,4,5,6,7))
 def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=4,y_length:float=4,z_length:float=4,num_int_points:int=256,epsilon:float=1e-7):
     """
-    Calculate the integration points along one line of sight in hammurabi way. Unlike integrate to the box boundary, now we integrate to a certain distance (x_length,y_length,z_length) way from observer.
+    Calculate the integration points along one line of sight in hammurabi way. Unlike integrate to the box boundary, now we integrate to a certain distance `(x_length,y_length,z_length)` way from observer.
 
     Args:
         theta (float): In unit of rad. The galactic longitude.
@@ -99,7 +99,7 @@ def get_healpix_positions(nside = 64,obs_coord:tuple[float] = (-8.3,0.,0.006),x_
 
     Returns:
         tuple:
-            - poss (jnp.Array): In unit of kpc. 3D array of shape (`npix`,`num_int_points`,3), coordinates of integration points along all sightlines of a `HEALPix` map.
+            - poss (jnp.Array): In unit of kpc. 3D array of shape (`npix, num_int_points`, 3), coordinates of integration points along all sightlines of a `HEALPix` map.
             - dls (jnp.Array): In unit of kpc. 1D array of shape (`npix`), length of integration segment for all sightlines.
             - nhats (jnp.Array): In unit of rad. 2D array of shape (`npix`,3), unit vector of LoS for all pixels.
     """

@@ -16,6 +16,11 @@ Welcome to Synax's documentation!
 
    source/installation
    source/usage
-   source/api
 
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+   :caption: API Documentation:
+
+   source/api
 

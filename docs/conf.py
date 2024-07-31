@@ -22,6 +22,7 @@ extensions = ['sphinx.ext.autodoc',  # Automatically document docstrings
     'sphinx.ext.napoleon',  # Support for NumPy and Google style docstrings
     'sphinx.ext.viewcode',  # Add links to highlighted source code
     'sphinx.ext.mathjax',
+    'nbsphinx',
     ]
 
 templates_path = ['_templates']
@@ -35,6 +36,8 @@ autodoc_default_options = {
     'show-inheritance': False,
     'special-members': '',
 }
+nbsphinx_execute = 'never'  # or 'never' if you do not want to execute notebooks during build
+
 
 autodoc_mock_imports = ["jax",'healpy','interpax']
 
