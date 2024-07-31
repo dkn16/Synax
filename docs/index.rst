@@ -2,6 +2,8 @@
    sphinx-quickstart on Tue Jul 30 15:06:05 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
+.. include:: ../examples/Fields.ipynb
+.. include:: ../examples/Fields.ipynb
 
 Synax documentation
 ===================
@@ -18,12 +20,12 @@ Welcome to Synax's documentation!
    source/quickstart
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Examples:
    :hidden:
 
-   ../examples/Integration.ipynb
-   ../examples/Field.ipynb
+   Integration
+   Fields
 
 .. toctree::
    :hidden:
