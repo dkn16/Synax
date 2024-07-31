@@ -1,13 +1,22 @@
 Installation Guide
 ==================
+From PyPi
+------------------
+To be written.
 
-To install the `synax` package, follow these steps:
+From Source
+------------------
+
+To install the ``synax`` package from , follow these steps:
 
 1. Open your terminal.
-2. Run the following command:
+2. Navigate to your desired install directory.
+3. Run the following command:
 
    .. code-block:: bash
       
       git clone https://github.com/dkn16/Synax.git
       cd Synax
-      pip install -e .
+      pip install .
+
+This command will automatically clone the repo from github and install ``synax``. Users from Mainland China might find it easier to run ``git clone git@github.com:dkn16/Synax``.

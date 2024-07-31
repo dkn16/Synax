@@ -4,7 +4,7 @@ Using Synax
 Basic Example
 -------------
 
-Here is a basic example of how to use the `synax` package:
+Here is a basic example of how to use the ``synax`` package:
 
 .. code-block:: python
 
