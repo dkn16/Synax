@@ -8,8 +8,6 @@ synax.synax
    :members:
    :undoc-members:
    :private-members:
-   :special-members: 
-   :show-inheritance:
 
 synax.coords
 -----------------
@@ -18,8 +16,6 @@ synax.coords
    :members:
    :undoc-members:
    :private-members:
-   :special-members: 
-   :show-inheritance:
 
 synax.bfield
 -----------------
@@ -27,7 +23,5 @@ synax.bfield
    :members:
    :undoc-members:
    :private-members:
-   :special-members:
-   :show-inheritance:
 
 

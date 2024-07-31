@@ -21,6 +21,7 @@ release = '0.1.0'
 extensions = ['sphinx.ext.autodoc',  # Automatically document docstrings
     'sphinx.ext.napoleon',  # Support for NumPy and Google style docstrings
     'sphinx.ext.viewcode',  # Add links to highlighted source code
+    'sphinx.ext.mathjax',
     ]
 
 templates_path = ['_templates']

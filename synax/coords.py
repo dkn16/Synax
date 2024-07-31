@@ -21,9 +21,10 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
         num_int_points (int): the number of integration points along one LoS.
 
     Returns:
-        jnp.Array: In unit of kpc. 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
-        jnp.float: In unit of kpc. length of each integration segment.
-        jnp.Array: In unit of rad. 1D array of shape (3), unit vector of this LoS.
+        tuple:
+            - pos (jnp.Array): In unit of kpc. 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
+            - dl (jnp.float): In unit of kpc. length of each integration segment.
+            - nhat (jnp.Array): In unit of rad. 1D array of shape (3), unit vector of this LoS.
     """
     nx = jnp.sin(theta)*jnp.cos(phi)
     ny = jnp.sin(theta)*jnp.sin(phi)
@@ -59,9 +60,10 @@ def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006
         num_int_points (int): the number of integration points along one LoS.
 
     Returns:
-        jnp.Array: In unit of kpc. 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
-        jnp.float: In unit of kpc. length of each integration segment.
-        jnp.Array: In unit of rad. 1D array of shape (3), unit vector of this LoS.
+        tuple:
+            - pos (jnp.Array): In unit of kpc. 2D array of shape (num_int_points,3), coordinates of integration points along one sightline specified by (theta,phi).
+            - dl (jnp.float): In unit of kpc. length of each integration segment.
+            - nhat (jnp.Array): In unit of rad. 1D array of shape (3), unit vector of this LoS.
     """
     nx = jnp.sin(theta)*jnp.cos(phi)
     ny = jnp.sin(theta)*jnp.sin(phi)
@@ -96,9 +98,10 @@ def get_healpix_positions(nside = 64,obs_coord:tuple[float] = (-8.3,0.,0.006),x_
         num_int_points (int): the number of integration points along one LoS.
 
     Returns:
-        jnp.Array: In unit of kpc. 3D array of shape (`npix`,`num_int_points`,3), coordinates of integration points along all sightlines of a `HEALPix` map.
-        jnp.Array: In unit of kpc. 1D array of shape (`npix`), length of integration segment for all sightlines.
-        jnp.Array: In unit of rad. 2D array of shape (`npix`,3), unit vector of LoS for all pixels.
+        tuple:
+            - poss (jnp.Array): In unit of kpc. 3D array of shape (`npix`,`num_int_points`,3), coordinates of integration points along all sightlines of a `HEALPix` map.
+            - dls (jnp.Array): In unit of kpc. 1D array of shape (`npix`), length of integration segment for all sightlines.
+            - nhats (jnp.Array): In unit of rad. 2D array of shape (`npix`,3), unit vector of LoS for all pixels.
     """
     
     obtain_vmap = jax.vmap(lambda theta,phi:obtain_positions(theta,phi,obs_coord = obs_coord,x_length=x_length,y_length=y_length,z_length=z_length,num_int_points=num_int_points,epsilon=epsilon))
