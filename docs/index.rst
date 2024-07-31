@@ -11,11 +11,19 @@ Welcome to Synax's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: User Guide:
    :hidden:
 
    source/installation
-   source/usage
+   source/quickstart
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Examples:
+   :hidden:
+
+   examples/Integration.ipynb
+   examples/Field.ipynb
 
 .. toctree::
    :hidden:

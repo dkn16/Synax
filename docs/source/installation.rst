@@ -7,5 +7,8 @@ To install the `synax` package, follow these steps:
 2. Run the following command:
 
    .. code-block:: bash
+      git clone https://github.com/dkn16/Synax.git
 
-      pip install synax
+      cd Synax
+
+      pip install -e .
