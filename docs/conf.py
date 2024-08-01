@@ -7,18 +7,6 @@ import sys,shutil
 sys.path.insert(0, os.path.abspath('../synax'))
 sys.path.insert(0, os.path.abspath('../examples/'))
 
-notebooks_dir = '../examples'
-docs_dir = 'nb/'
-
-# List of notebook files to copy
-notebooks = ['Integration.ipynb','Fields.ipynb']
-os.system('pwd')
-
-for notebook in notebooks:
-    src = os.path.join(notebooks_dir, notebook)
-    dst = os.path.join(docs_dir, notebook)
-    #shutil.copy(src, dst)
-    os.system('cp '+src+' '+dst)
 #os.system('ln -s ../examples/Integration.ipynb nb/Integration.ipynb')
 
 # -- Project information -----------------------------------------------------

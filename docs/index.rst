@@ -8,7 +8,12 @@ Synax documentation
 ===================
 
 Welcome to Synax's documentation!
-=================================
+
+.. admonition:: Where to start?
+    :class: tip
+
+    🖥 A good place to get started is with the :doc:`installation` and then the
+    :doc:`quickstart` guide. 
 
 .. toctree::
    :maxdepth: 2
@@ -33,4 +38,21 @@ Welcome to Synax's documentation!
    :caption: API Documentation:
 
    source/api
+   GitHub Repository <https://github.com/dkn16/synax>
 
+Attribution & Citation
+======================
+
+Please cite the following if you find this code useful in your
+research. The BibTeX entries for the papers are::
+
+    To be specified later.
+
+    
+
+
+Changelog
+=========
+**0.1.0 (2024/08/01)**
+
+- First version
