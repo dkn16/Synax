@@ -165,4 +165,4 @@ examples/states_rwm*.npy
 examples/*.py
 examples/*.sh
 examples/*.out
-docs/nb/*
+
