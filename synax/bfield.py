@@ -11,14 +11,17 @@ from typing import List, Tuple, Union,Dict
 
 class B_jf12:
     """
-        Initializer method (constructor)
-        Args:
-            instance_attribute: Attribute unique to each instance
-        """
-        # Instance attributes (unique to each instance)
+    jf12 B field model().
 
-    # Class attributes (shared by all instances)
-    #class_attribute = 'I am a class attribute'
+    Args:
+        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be 
+
+    Returns:
+        tuple:
+            - pos (jnp.Array): In unit of kpc. 2D array of shape (``num_int_points``,3), coordinates of integration points along one sightline specified by ``(theta,phi)``.
+            - dl (jnp.float): In unit of kpc. length of each integration segment.
+            - nhat (jnp.Array): In unit of rad. 1D array of shape (3), unit vector of this LoS.
+    """
 
     def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
         

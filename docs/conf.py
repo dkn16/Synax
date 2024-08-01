@@ -16,7 +16,8 @@ notebooks = ['Integration.ipynb','Fields.ipynb']
 for notebook in notebooks:
     src = os.path.join(notebooks_dir, notebook)
     dst = os.path.join(docs_dir, notebook)
-    shutil.copy(src, dst)
+    #shutil.copy(src, dst)
+    os.system('cp '+src+' '+dst)
 #os.system('ln -s ../examples/Integration.ipynb nb/Integration.ipynb')
 
 # -- Project information -----------------------------------------------------
