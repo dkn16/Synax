@@ -14,7 +14,7 @@ class B_jf12:
     jf12 B field model().
 
     Args:
-        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be 
+        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
 
     Returns:
         tuple:
