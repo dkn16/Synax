@@ -17,10 +17,7 @@ class B_jf12:
         coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
 
     Returns:
-        tuple:
-            - pos (jnp.Array): In unit of kpc. 2D array of shape (``num_int_points``,3), coordinates of integration points along one sightline specified by ``(theta,phi)``.
-            - dl (jnp.float): In unit of kpc. length of each integration segment.
-            - nhat (jnp.Array): In unit of rad. 1D array of shape (3), unit vector of this LoS.
+        A instance of jf12 B field generator.
     """
 
     def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
@@ -151,7 +148,15 @@ class B_jf12:
 
 class B_lsa():
     
-    class_attribute = 'I am a class attribute'
+    """
+    lsa B field model().
+
+    Args:
+        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
+
+    Returns:
+        A instance of lsa B field generator.
+    """
 
     def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
         
