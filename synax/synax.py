@@ -60,28 +60,32 @@ def sync_P_const(freq,spectral_index: float=3.):
 
 @jax.jit
 def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
-    # calculating the  synchrotron emissivity 
-    # Input:
-    #   freq (float): frequency to be computed.
-    #   b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
-    #   C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
-    #   spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
-    # Output:
-    #   j (jax.Array): parallel emissivity for the synchrotron emission.
+    """
+    calculating the  synchrotron emissivity.
+    Args:
+       freq (float): frequency to be computed.
+       b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
+       C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+    Returns:
+       j (jax.Array): parallel emissivity for the synchrotron emission.
+    """
     
 
     return b_perp**(0.5+spectral_index*0.5)*C*sync_I_const(freq,spectral_index=spectral_index)
 
 @jax.jit
 def sync_emiss_P(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
-    # calculating the  synchrotron emissivity 
-    # Input:
-    #   freq (float): frequency to be computed.
-    #   b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
-    #   C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
-    #   spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
-    # Output:
-    #   j (jax.Array): parallel emissivity for the synchrotron emission.
+    """
+    calculating the polarized synchrotron emissivity.
+    Args:
+       freq (float): frequency to be computed.
+       b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
+       C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+    Returns:
+       j (jax.Array): parallel emissivity for the synchrotron emission.
+    """
     
 
     return b_perp**(0.5+spectral_index*0.5)*C*sync_P_const(freq,spectral_index=spectral_index)
