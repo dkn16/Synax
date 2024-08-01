@@ -26,6 +26,16 @@ rm_freq_irrelavent_const = (const.e*q_converter)**3/(const.electron_mass**2*cons
 
 @jax.jit
 def sync_I_const(freq,spectral_index: float=3.):
+    """
+    calculating the constant irrelavent to b_perp and C in the synchrotron emissivity.
+
+    Args:
+       freq (float): frequency to be computed. In GHz.
+       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+
+    Returns:
+       Cp (jax.Array): parallel emissivity for the synchrotron emission.
+    """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
     
@@ -43,6 +53,16 @@ def sync_I_const(freq,spectral_index: float=3.):
 
 @jax.jit
 def sync_P_const(freq,spectral_index: float=3.):
+    """
+    calculating the constant irrelavent to b_perp and C in the polarized synchrotron emissivity.
+
+    Args:
+       freq (float): frequency to be computed. In GHz.
+       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+
+    Returns:
+       Cp (jax.Array): perpenndicular emissivity for the polarized synchrotron emission.
+    """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
     
@@ -61,12 +81,14 @@ def sync_P_const(freq,spectral_index: float=3.):
 @jax.jit
 def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
     """
-    calculating the  synchrotron emissivity.
+    Calculating the  synchrotron emissivity.
+
     Args:
-       freq (float): frequency to be computed.
+       freq (float): frequency to be computed. In GHz.
        b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
        C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
-       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+       spectral_index (float): spectrum of cosmic ray electron spectrum.
+
     Returns:
        j (jax.Array): parallel emissivity for the synchrotron emission.
     """
@@ -77,14 +99,15 @@ def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float
 @jax.jit
 def sync_emiss_P(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
     """
-    calculating the polarized synchrotron emissivity.
+    Calculating the polarized synchrotron emissivity.
+
     Args:
-       freq (float): frequency to be computed.
+       freq (float): frequency to be computed. In GHz.
        b_perp (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS.
        C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
-       spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
+       spectral_index (float): spectrum of cosmic ray electron spectrum.
     Returns:
-       j (jax.Array): parallel emissivity for the synchrotron emission.
+       j (jax.Array): perpendicular emissivity for the polarized synchrotron emission.
     """
     
 
