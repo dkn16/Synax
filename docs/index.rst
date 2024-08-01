@@ -16,7 +16,7 @@ Welcome to Synax's documentation!
    :hidden:
 
    source/installation
-   source/quickstart
+   nb/Simulation_lsa
 
 .. toctree::
    :maxdepth: 1
