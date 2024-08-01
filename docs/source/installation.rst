@@ -1,5 +1,12 @@
 Installation Guide
 ==================
+
+Dependencies
+------------
+
+**synax** depends on ``jax``, ``numpy``, ``scipy``, ``healpy``, ``interpax``.
+
+
 From PyPi
 ------------------
 We havn't upload our package to PyPi yet. Will do later.
