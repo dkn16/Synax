@@ -12,6 +12,7 @@ build:
     python: "3.11"
   commands:
     - pwd
+    - ls
     - cp examples/* docs/nb/*
     # You can also specify other tool versions:
     # nodejs: "19"
