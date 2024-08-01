@@ -4,7 +4,7 @@ Installation Guide
 Dependencies
 ------------
 
-**synax** depends on ``jax``, ``numpy``, ``scipy``, ``healpy``, ``interpax``.
+**synax** depends on ``jax``, ``numpy``, ``scipy``, ``healpy``, ``interpax``. We strongly recommend install ``jax`` manually following `their documentation <https://jax.readthedocs.io/en/latest/installation.html/>`_. first so that you can install the version that fits your platform.
 
 
 From PyPi
