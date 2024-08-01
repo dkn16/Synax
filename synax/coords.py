@@ -42,7 +42,7 @@ def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length
     
     dl = (xs[0]**2+ys[0]**2+zs[0]**2)**0.5*2
     
-    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]).T,dl,jnp.array([nx,ny,nz])
+    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl,jnp.array([nx,ny,nz])
 
 # obtaining integration locations
 @partial(jax.jit, static_argnums=(2,3,4,5,6,7))
@@ -81,7 +81,7 @@ def obtain_positions_hammurabi(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006
     
     dl = (xs[0]**2+ys[0]**2+zs[0]**2)**0.5*2
     
-    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]).T,dl,jnp.array([nx,ny,nz])
+    return jnp.array([xs+obs_coord[0],ys+obs_coord[1],zs+obs_coord[2]]),dl,jnp.array([nx,ny,nz])
 
 
 
@@ -108,4 +108,4 @@ def get_healpix_positions(nside = 64,obs_coord:tuple[float] = (-8.3,0.,0.006),x_
     n_pixs = np.arange(0,12*nside**2)
     theta,phi = hp.pix2ang(nside,n_pixs)
     poss,dls,nhats = obtain_vmap(theta,phi)
-    return poss.transpose((2,0,1)),dls,nhats
+    return poss.transpose((1,0,2)),dls,nhats
