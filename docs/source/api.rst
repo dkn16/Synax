@@ -10,3 +10,5 @@ API Reference
     api/synax
     api/coords
     api/bfield
+    api/cfield
+    api/tefield

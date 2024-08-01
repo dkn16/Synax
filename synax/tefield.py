@@ -13,7 +13,16 @@ from typing import List, Tuple, Union,Dict
 
 class TE_grid():
     
-    class_attribute = 'I am a class attribute'
+    """
+    grid TE field model. See Synax paper for more details.
+
+    Args:
+        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
+        coords_field (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coords[i] is the 1D vector of coordinates along i-th axis. Since the grid is a regular 3D grid, 1D vectors are sufficient to represents the coordinates.
+
+    Returns:
+        A instance of grid TE field generator.
+    """
 
     def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]],coords_field:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
         
@@ -34,7 +43,15 @@ class TE_grid():
     
     @partial(jax.jit, static_argnums=(0,))
     def TE_field(self,te_field_grid):
-        
+        """
+        Calculate grid TE-field at all positions specified by ``coords``.
+
+        Args:
+            TE_field_grid (Dict[str,float]): your field in a regular 3D grid.
+
+        Returns:
+            jnp.Array of shape (``coords[0].shape``). ``coords`` is the parameter of your TE_grid instance.
+        """
         return self.field_calc(self.pos,te_field_grid).reshape(self.shape)
     
     def __str__(self):

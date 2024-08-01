@@ -122,7 +122,7 @@ class B_jf12:
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,jf12_params):
         """
-        Calculate jf12 B-field at all positions specified by ``coordinates``.
+        Calculate jf12 B-field at all positions specified by ``coords``.
 
         Args:
             jf12_params (Dict[str,float]): A dict contains all parameters of the jf12 model.
@@ -214,7 +214,7 @@ class B_lsa():
     @staticmethod
     def B_calc(lsa_params,r,z,cos_p,sin_p,mask):
         """
-        Calculate jf12 B-field at a given position ``(r,phi,z)``.
+        Calculate lsa B-field at a given position ``(r,phi,z)``.
 
         Args:
             lsa_params (Dict[str,float]): A dict contains all parameters of the lsa model.
@@ -238,7 +238,7 @@ class B_lsa():
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,lsa_params):
         """
-        Calculate lsa B-field at all positions specified by ``coordinates``.
+        Calculate lsa B-field at all positions specified by ``coords``.
 
         Args:
             lsa_params (Dict[str,float]): A dict contains all parameters of the lsa model.
@@ -294,10 +294,10 @@ class B_grid():
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,B_field_grid):
         """
-        Calculate grid B-field at all positions specified by ``coordinates``.
+        Calculate grid B-field at all positions specified by ``coords``.
 
         Args:
-            B_field_grid (Dict[str,float]): A dict contains all parameters of the lsa model.
+            B_field_grid (Dict[str,float]): your field in a regular 3D grid.
 
         Returns:
             jnp.Array of shape (``coords[0].shape``,3). ``coords`` is the parameter of your B_grid instance.
