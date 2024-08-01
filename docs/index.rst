@@ -24,6 +24,7 @@ Welcome to Synax's documentation!
    :hidden:
 
    nb/Integration
+   nb/Fields
    
 
 .. toctree::

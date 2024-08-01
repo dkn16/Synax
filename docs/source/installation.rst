@@ -2,7 +2,7 @@ Installation Guide
 ==================
 From PyPi
 ------------------
-To be written.
+We havn't upload our package to PyPi yet. Will do later.
 
 From Source
 ------------------

@@ -11,7 +11,7 @@ notebooks_dir = '../examples'
 docs_dir = 'nb/'
 
 # List of notebook files to copy
-notebooks = ['Integration.ipynb']
+notebooks = ['Integration.ipynb','Fields.ipynb']
 
 for notebook in notebooks:
     src = os.path.join(notebooks_dir, notebook)
