@@ -34,7 +34,7 @@ def sync_I_const(freq,spectral_index: float=3.):
        spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
 
     Returns:
-       Cp (jax.Array): parallel emissivity for the synchrotron emission.
+       (jax.Array): parallel emissivity for the synchrotron emission.
     """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
@@ -61,7 +61,7 @@ def sync_P_const(freq,spectral_index: float=3.):
        spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
 
     Returns:
-       Cp (jax.Array): perpenndicular emissivity for the polarized synchrotron emission.
+       (jax.Array): perpenndicular emissivity for the polarized synchrotron emission.
     """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
@@ -90,7 +90,7 @@ def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float
        spectral_index (float): spectrum of cosmic ray electron spectrum.
 
     Returns:
-       j (jax.Array): parallel emissivity for the synchrotron emission.
+       (jax.Array): parallel emissivity for the synchrotron emission.
     """
     
 
@@ -107,7 +107,7 @@ def sync_emiss_P(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float
        C (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
        spectral_index (float): spectrum of cosmic ray electron spectrum.
     Returns:
-       j (jax.Array): perpendicular emissivity for the polarized synchrotron emission.
+       (jax.Array): perpendicular emissivity for the polarized synchrotron emission.
     """
     
 
@@ -117,7 +117,16 @@ def sync_emiss_P(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float
 
 class Synax():
     
-    class_name = 'Synax'
+    """
+    Synax simulator
+    Args:
+        sim_I (bool): whether sim synchrotron intensity.
+        sim_P (bool): whether sim polarized synchrotron intensity.
+
+
+    Returns:
+        A instance of Synax simulator.
+    """
 
     def __init__(self, sim_I = True,sim_P = True):
         
@@ -127,7 +136,25 @@ class Synax():
     @staticmethod
     @jax.jit
     def RM(freq,B_field,TE_field,nhats,dls,B_los):
-        #B_los = -1*((nhats[:,jnp.newaxis,:]*B_field)).sum(axis=-1)
+        """
+        Calculate rotation measure.
+
+        Args:
+            freq (float): frequency to be computed. In GHz.
+            B_field (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS at different places.
+            TE_field (jax.Array): 3D electron density field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+            nhats (jnp.Array): In unit of rad. unit vector of different LoS.
+            dls (jnp.float): In unit of kpc. length of each integration segment for every LoS.
+            B_los (jax.Array): LoS B-field magnitude.
+
+            
+
+        Returns:
+            tuple:
+                - fd (jnp.Array): rotation measure for each LoS integration point.
+                - fd_q (jnp.Array): cos(2*polarized angle), for Q map calculation.
+                - fd_u (jnp.Array):  sin(2*polarized angle), for U map calculation.
+        """
         phis = rm_freq_irrelavent_const*TE_field*B_los
         sinb = nhats[...,2]
         cosb = jnp.sqrt(1-sinb**2)
@@ -149,10 +176,41 @@ class Synax():
     @staticmethod
     @jax.jit
     def B_los(B_field,nhats):
+        """
+        Calculate LoS B-field.
+
+        Args:
+            B_field (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS at different places.
+            nhats (jnp.Array): In unit of rad. unit vector of different LoS.
+            
+
+        Returns:
+            (jnp.Array): LoS B-field magnitude.
+        """
         return -1*((nhats[:,jnp.newaxis,:]*B_field)).sum(axis=-1)
 
     @partial(jax.jit, static_argnums=(0,))
     def sim(self,freq,B_field,C_field,TE_field,nhats,dls,spectral_index):
+        """
+        Calculate sychrotron map.
+
+        Args:
+            freq (float): frequency to be computed. In GHz.
+            B_field (jax.Array): 3D magnetic field ($B_t$) perpendicular to the LOS at different places.
+            C_field (jax.Array): 3D field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+            TE_field (jax.Array): 3D electron density field, defined by $N(\gamma)d\gamma = C\gamma^{-p}d\gamma$. Varied at different locations.
+            nhats (jnp.Array): In unit of rad. unit vector of different LoS.
+            dls (jnp.float): In unit of kpc. length of each integration segment for every LoS.
+            spectral_index (float): spectrum of cosmic ray electron spectrum.
+
+            
+
+        Returns:
+            dict:
+               - dict['I'](jnp.Array): Sychrotron I map. return 0 if ``sim_I=False``
+               - dict['Q'](jnp.Array): Sychrotron Q map. return 0 if ``sim_P=False``
+               - dict['U'](jnp.Array): Sychrotron U map. return 0 if ``sim_P=False``
+        """
         B_los = self.B_los(B_field,nhats)
         B_trans = ((B_field**2).sum(axis=-1)-B_los**2)**0.5
         Sync_I = 0.
