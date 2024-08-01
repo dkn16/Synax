@@ -12,8 +12,8 @@ Welcome to Synax's documentation!
 .. admonition:: Where to start?
     :class: tip
 
-    🖥 A good place to get started is with the :doc:`installation` and then the
-    :doc:`quickstart` guide. 
+    🖥 A good place to get started is with the :doc:`source/installation` and then the
+    :doc:`nb/Simulation_lsa` guide. 
 
 .. toctree::
    :maxdepth: 2
