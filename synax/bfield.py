@@ -11,7 +11,7 @@ from typing import List, Tuple, Union,Dict
 
 class B_jf12:
     """
-    jf12 B field model().
+    jf12 B field model(https://ui.adsabs.harvard.edu/abs/2012ApJ...757...14J/abstract).
 
     Args:
         coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
@@ -63,6 +63,23 @@ class B_jf12:
 
     @staticmethod
     def B_calc(jf12_params: Dict[str,float],r:float,phi:float,z:float,is_r_less_rmin = 1.,is_r_less_rcent = 1.,b_disk = 1.,mask = 1.):
+        """
+        Calculate jf12 B-field at a given position ``(r,phi,z)``.
+
+        Args:
+            jf12_params (Dict[str,float]): A dict contains all parameters of the jf12 model.
+            r (float): r in cylindrical coordinates.
+            phi (float): phi in cylindrical coordinates.
+            z (float): z in cylindrical coordinates.
+            is_r_less_rmin: is this position less than the outer boundary of the molecular ring region. 1 for not, 0 for yes.
+            is_r_less_rcent: is this position less than the inner boundary of the molecular ring region. 1 for not, 0 for yes.
+            b_disk: B field in this spiral arm. 0. for all non-spiral-arm positions.
+            mask: is this position less than the outer boundary of the total B field. 1 for not, 0 for yes.
+
+
+        Returns:
+            (Bx,By,Bz) in this position.
+        """
         #r = (x**2+y**2)**1/2
         #phi = jnp.arctan2(y,x)
 
@@ -104,6 +121,15 @@ class B_jf12:
     
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,jf12_params):
+        """
+        Calculate jf12 B-field at all positions specified by ``coordinates``.
+
+        Args:
+            jf12_params (Dict[str,float]): A dict contains all parameters of the jf12 model.
+
+        Returns:
+            jnp.Array of shape (``coords[0].shape``,3). ``coords`` is the parameter of your B_jf12 instance.
+        """
         bv_b = jnp.array([jf12_params['b_arm_1'],jf12_params['b_arm_2'],jf12_params['b_arm_3'],jf12_params['b_arm_4'],jf12_params['b_arm_5'],jf12_params['b_arm_6'],jf12_params['b_arm_7'],0,0])
         b8 = -1*(self.f[:8]*bv_b[:8]).sum()/self.f[7]
         bv_b = bv_b.at[7].set(b8)
@@ -117,6 +143,17 @@ class B_jf12:
     
     @staticmethod
     def get_index(r:float,phi:float,z:float) -> int:
+        """
+        Calculate the which spiral arms is position specified by ``coordinates`` in.
+
+        Args:
+            r (float): r in cylindrical coordinates.
+            phi (float): phi in cylindrical coordinates.
+            z (float): z in cylindrical coordinates.
+
+        Returns:
+            Spiral arm index (0-7). 8 for not in any spiral arms.
+        """
         rc_b = jnp.array([0,5.1,  6.3,  7.1, 8.3, 9.8,
               11.4, 12.7, 15.5])
         
@@ -149,7 +186,7 @@ class B_jf12:
 class B_lsa():
     
     """
-    lsa B field model().
+    lsa B field model. See Synax paper for more details.
 
     Args:
         coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
@@ -176,6 +213,21 @@ class B_lsa():
         
     @staticmethod
     def B_calc(lsa_params,r,z,cos_p,sin_p,mask):
+        """
+        Calculate jf12 B-field at a given position ``(r,phi,z)``.
+
+        Args:
+            lsa_params (Dict[str,float]): A dict contains all parameters of the lsa model.
+            r (float): r in cylindrical coordinates.
+            z (float): z in cylindrical coordinates.
+            cos_p (float): cos(phi), phi is the polar angle in cylindrical coordinates.
+            sin_p (float): sin(phi), phi is the polar angle in cylindrical coordinates.
+            mask: is this position less than the outer boundary of the total B field. 1 for not, 0 for yes.
+
+
+        Returns:
+            (Bx,By,Bz) in this position.
+        """
         psi = lsa_params["psi0"]+lsa_params["psi1"]*jnp.log(r/8)
         chi = lsa_params["chi0"]*jnp.tanh(z)
         
@@ -185,7 +237,15 @@ class B_lsa():
         
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,lsa_params):
-        
+        """
+        Calculate lsa B-field at all positions specified by ``coordinates``.
+
+        Args:
+            lsa_params (Dict[str,float]): A dict contains all parameters of the lsa model.
+
+        Returns:
+            jnp.Array of shape (``coords[0].shape``,3). ``coords`` is the parameter of your B_lsa instance.
+        """
         return (self.B_calc_vmap(lsa_params,self.r.reshape(-1),self.z.reshape(-1),self.cos_p.reshape(-1),self.sin_p.reshape(-1),self.total_mask.reshape(-1))*1e-6).reshape(self.shape+  (3,))
     
     def __str__(self):
@@ -203,7 +263,16 @@ class B_lsa():
 
 class B_grid():
     
-    class_attribute = 'I am a class attribute'
+    """
+    grid B field model. See Synax paper for more details.
+
+    Args:
+        coords (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coordinates of all integration points. Should be of size (3,...), for example ``coords[0]`` is the x-coordinates.
+        coords_field (Union[jax.Array,List[jax.Array],Tuple[jax.Array]]): coords[i] is the 1D vector of coordinates along i-th axis. Since the grid is a regular 3D grid, 1D vectors are sufficient to represents the coordinates.
+
+    Returns:
+        A instance of grid B field generator.
+    """
 
     def __init__(self, coords:Union[jax.Array,List[jax.Array],Tuple[jax.Array]],coords_field:Union[jax.Array,List[jax.Array],Tuple[jax.Array]]):
         
@@ -224,7 +293,15 @@ class B_grid():
     
     @partial(jax.jit, static_argnums=(0,))
     def B_field(self,B_field_grid):
-        
+        """
+        Calculate grid B-field at all positions specified by ``coordinates``.
+
+        Args:
+            B_field_grid (Dict[str,float]): A dict contains all parameters of the lsa model.
+
+        Returns:
+            jnp.Array of shape (``coords[0].shape``,3). ``coords`` is the parameter of your B_grid instance.
+        """
         return self.field_calc(self.pos,B_field_grid).reshape(self.shape+(3,))
     
     def __str__(self):
