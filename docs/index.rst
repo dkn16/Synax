@@ -52,6 +52,7 @@ For polarizations, **synax** is recommended to use with frequencies higher than 
    nb/Integration
    nb/Fields
    nb/Sampling_lsa
+   nb/Optimising_haslam
    
 
 .. toctree::
