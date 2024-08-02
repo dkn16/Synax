@@ -4,20 +4,18 @@
    contain the root `toctree` directive.
 
 
-Synax documentation
+synax documentation
 ===================
 
-Welcome to Synax's documentation!
+Welcome to synax's documentation!
 
-`synax` is a python package to simulate Galactic sychrotron emission, for both intensity and polarized intensity. 
-`synax` is heavily based on `jax <https://jax.readthedocs.io/en/latest/installation.html/>`_ to obtain the features such as automatic differentiation (AD) and multi-platform (CPU, GPU, TPU, etc. ) support.
-With the access to the gradient, one can integrate `synax` with the whole `jax` ecosystem easily, and perform efficient inferecen algorithms such as Hamitonian Monte Carlo and ADAM optimization.
+**Synax** is a Python package designed to simulate Galactic synchrotron emission, covering both total and polarized intensity. **Synax** leverages the capabilities of [JAX](https://jax.readthedocs.io/en/latest/installation.html/), providing features like automatic differentiation (AD) and support for multiple platforms (CPU, GPU, TPU, etc.). With access to gradients, **Synax** can seamlessly integrate into the broader **JAX** ecosystem, enabling the use of efficient inference algorithms such as Hamiltonian Monte Carlo and ADAM optimization.
 
 .. figure:: figures/haslam_opt.pdf
    :alt: Optimized haslam map
    :align: center
 
-   Haslam 408 MHz map can be reproduced by optimizing a 3D grid **B** field with `synax`!
+   Haslam 408 MHz map can be reproduced by optimizing a 3D grid **B** field with **synax**!
 
 .. admonition:: Where to start?
     :class: tip
