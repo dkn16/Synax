@@ -14,6 +14,10 @@ Welcome to Synax's documentation!
 
     🖥 A good place to get started is with the :doc:`source/installation` and then the
     :doc:`nb/Simulation_lsa` guide. 
+    💡 Then :doc:`nb/Integration` and :doc:`nb/Fields` shows more details on how we generate the necessary variables.
+    📖 We demonstrate some examples about what can we do with AD in :doc:`nb/Sampling_lsa` and .
+    🐛 If you find bugs, please head on over to the GitHub issues page.
+    👈 Check out the sidebar to find the full table of contents.
 
 .. toctree::
    :maxdepth: 2
@@ -30,6 +34,7 @@ Welcome to Synax's documentation!
 
    nb/Integration
    nb/Fields
+   nb/Sampling_lsa
    
 
 .. toctree::
