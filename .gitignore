@@ -161,8 +161,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 examples/*.fits
-examples/states_rwm*.npy
+examples/states_*.npy
 examples/*.py
 examples/*.sh
 examples/*.out
-
+examples/*.pickle
+examples/*3lsa.npy

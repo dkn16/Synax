@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.abspath('../examples/'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Synax'
+project = 'synax'
 copyright = '2024, Kangning Diao, Zack Li, Richard D.P. Grumitt'
 author = 'Kangning Diao, Zack Li, Richard D.P. Grumitt'
 release = '0.1.0'
