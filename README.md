@@ -8,23 +8,14 @@
 
 ## Brief introduction
 
-Here's an edited version of the README file for your package:
-
----
-
-# synax
-
 **synax** is a Python package designed to simulate Galactic synchrotron emission, covering both total and polarized intensity. It leverages the power of JAX, offering features like automatic differentiation (AD) and multi-platform support (CPU, GPU, TPU). By providing gradient access, **synax** integrates smoothly into the JAX ecosystem, enabling the use of efficient inference algorithms like Hamiltonian Monte Carlo (HMC) and ADAM optimization.
 
-![Haslam 408 MHz map can be reproduced by optimizing a 3D grid B field with synax](figures/haslam_opt.pdf)
+![Haslam 408 MHz map can be reproduced by optimizing a 3D grid B field with synax](figures/haslam_opt.jpg)
 
 **Intensity Simulation**: Currently, **synax** supports frequencies above ~408 MHz. The package does not yet include free-free emission and absorption, which are more significant at lower frequencies. These features will be added in future versions.
 
 **Polarization Simulation**: For accurate polarization results, **synax** is recommended for frequencies above 1 GHz. Lower frequencies require finer integration step sizes to account for rapid changes in polarization angles along sightlines, which may exceed typical GPU memory limits.
 
---- 
-
-Let me know if you'd like further revisions!
 
 ## Documentation
 
