@@ -164,7 +164,7 @@ class Synax():
         Bz = B_field[...,2]
         By = B_field[...,1]
         Bx = B_field[...,0]
-        tanchi0 = (Bz*cosb[:,jnp.newaxis]-sinb[:,jnp.newaxis]*(cosl[:,jnp.newaxis]*Bx+By*sinl[:,jnp.newaxis]))/(Bx*sinl[:,jnp.newaxis]-By*cosl[:,jnp.newaxis])
+        tanchi0 = (Bz*cosb[:,jnp.newaxis]-sinb[:,jnp.newaxis]*(cosl[:,jnp.newaxis]*Bx+By*sinl[:,jnp.newaxis]))/(Bx*sinl[:,jnp.newaxis]-By*cosl[:,jnp.newaxis]+1e-16)
         chi0 = jnp.arctan(tanchi0)
         phi_int = jnp.cumsum(phis,axis=1)*dls[:,jnp.newaxis]
 

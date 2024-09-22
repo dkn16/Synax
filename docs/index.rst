@@ -7,7 +7,7 @@
 synax documentation
 ===================
 
-Welcome to synax's documentation!
+Welcome to **synax**'s documentation!
 
 **synax** is a Python package designed to simulate Galactic synchrotron emission, covering both total and polarized intensity. **synax** leverages the capabilities of `JAX <https://jax.readthedocs.io/en/latest/>`_, providing features like automatic differentiation (AD) and support for multiple platforms (CPU, GPU, TPU, etc.). With access to gradients, **Synax** can seamlessly integrate into the broader **JAX** ecosystem, enabling the use of efficient inference algorithms such as Hamiltonian Monte Carlo and ADAM optimization.
 
@@ -30,7 +30,7 @@ For polarizations, **synax** is recommended to use with frequencies higher than 
 
     💡 Then :doc:`nb/Integration` and :doc:`nb/Fields` shows more details on how we generate the necessary variables.
 
-    📖 We demonstrate some examples about what can we do with AD in :doc:`nb/Sampling_lsa` and .
+    📖 We demonstrate some examples about what can we do with AD in :doc:`nb/Sampling_lsa` and optimising :doc:`nb/Optimising_haslam`.
 
     🐛 If you find bugs, please head on over to the GitHub issues page.
     
@@ -53,6 +53,7 @@ For polarizations, **synax** is recommended to use with frequencies higher than 
    nb/Fields
    nb/Sampling_lsa
    nb/Optimising_haslam
+   nb/ExtraGalactic
    
 
 .. toctree::
