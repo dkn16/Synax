@@ -115,13 +115,13 @@ def get_rotated_box_vertices(x, y, z, theta, phi):
     """
     Calculate the coordinates of the vertices of a rectangular box after rotation.
 
-    Parameters:
-    - x, y, z: Half dimensions of the box along the X, Y, and Z axes. e.g. (-x,x) is the boundary of the box in x-axis
-    - theta: Rotation angle around the Z-axis (in radians).
-    - phi: Rotation angle around the Y-axis (in radians).
+    Args:
+        x, y, z: Half dimensions of the box along the X, Y, and Z axes. e.g. (-x,x) is the boundary of the box in x-axis
+        theta: Rotation angle around the Z-axis (in radians).
+        phi: Rotation angle around the Y-axis (in radians).
 
     Returns:
-    - vertices_rotated: A (8, 3) array of the rotated vertices.
+        - vertices_rotated: A (8, 3) array of the rotated vertices.
     """
     # Half dimensions
     hx, hy, hz = x , y , z 
@@ -164,11 +164,11 @@ def find_min_rectangle_xy(vertices_rotated):
     """
     Find the minimum axis-aligned rectangle in the X-Y plane that contains all projected vertices.
 
-    Parameters:
-    - vertices_rotated: A (8, 3) array of the rotated vertices.
+    Args:
+        vertices_rotated: A (8, 3) array of the rotated vertices.
 
     Returns:
-    - min_x,max_x,min_y,max_y
+        - min_x,max_x,min_y,max_y
     """
     # Project onto X-Y plane
     xy_coords = vertices_rotated[:, :2]  # Take only X and Y coordinates
@@ -188,14 +188,14 @@ def vertical_line_intersects_box(vertices_rotated, x0, y0):
     """
     Determines whether the vertical line at (x0, y0) intersects the rotated box.
 
-    Parameters:
-    - vertices_rotated: A (8, 3) array of the rotated vertices.
-    - x0, y0: Coordinates of the point(s) in the XY plane. Can be scalars or arrays.
+    Args:
+        vertices_rotated: A (8, 3) array of the rotated vertices.
+        x0, y0: Coordinates of the point(s) in the XY plane. Can be scalars or arrays.
 
     Returns:
-    - intersects: Boolean array indicating whether each line intersects the box.
-    - min_z: Array of minimum Z-values where the line intersects the box.
-    - max_z: Array of maximum Z-values where the line intersects the box.
+        - intersects: Boolean array indicating whether each line intersects the box.
+        - min_z: Array of minimum Z-values where the line intersects the box.
+        - max_z: Array of maximum Z-values where the line intersects the box.
     """
     # Ensure x0 and y0 are arrays for broadcasting
     x0 = jnp.atleast_1d(x0)
@@ -296,13 +296,13 @@ def transform_points_back(points, theta, phi):
     """
     Transform the array of points back to the original coordinate system.
 
-    Parameters:
-    - points: array of shape (..., 3), where ... can be any number of dimensions
-    - theta: rotation angle around the Z-axis (in radians)
-    - phi: rotation angle around the Y-axis (in radians)
+    Args:
+        points: array of shape (..., 3), where ... can be any number of dimensions
+        theta: rotation angle around the Z-axis (in radians)
+        phi: rotation angle around the Y-axis (in radians)
 
     Returns:
-    - points_original: array of same shape as 'points', points in the original coordinate system
+        - points_original: array of same shape as 'points', points in the original coordinate system
     """
     # Compute the rotation matrices
     cos_theta = jnp.cos(theta)
