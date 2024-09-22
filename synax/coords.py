@@ -168,7 +168,8 @@ def find_min_rectangle_xy(vertices_rotated):
         vertices_rotated: A (8, 3) array of the rotated vertices.
 
     Returns:
-        - min_x,max_x,min_y,max_y
+        tuple:
+            - min_x,max_x,min_y,max_y
     """
     # Project onto X-Y plane
     xy_coords = vertices_rotated[:, :2]  # Take only X and Y coordinates
@@ -193,9 +194,10 @@ def vertical_line_intersects_box(vertices_rotated, x0, y0):
         x0, y0: Coordinates of the point(s) in the XY plane. Can be scalars or arrays.
 
     Returns:
-        - intersects: Boolean array indicating whether each line intersects the box.
-        - min_z: Array of minimum Z-values where the line intersects the box.
-        - max_z: Array of maximum Z-values where the line intersects the box.
+        tuple:
+            - intersects: Boolean array indicating whether each line intersects the box.
+            - min_z: Array of minimum Z-values where the line intersects the box.
+            - max_z: Array of maximum Z-values where the line intersects the box.
     """
     # Ensure x0 and y0 are arrays for broadcasting
     x0 = jnp.atleast_1d(x0)
@@ -302,7 +304,8 @@ def transform_points_back(points, theta, phi):
         phi: rotation angle around the Y-axis (in radians)
 
     Returns:
-        - points_original: array of same shape as 'points', points in the original coordinate system
+        Array:
+            - points_original: array of same shape as 'points', points in the original coordinate system
     """
     # Compute the rotation matrices
     cos_theta = jnp.cos(theta)
