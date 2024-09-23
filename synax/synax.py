@@ -47,9 +47,9 @@ def sync_I_const(freq,spectral_index: float=3.):
     
     consts = freq_irrelavent*(omega*elect_combi)**(0.5-spectral_index/2)*gamma_func_1*gamma_func_2_process
     
-    p = freq*temp_covert
+    #p = freq*temp_covert
     
-    return consts*kpc*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
+    return consts*kpc#*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
 
 @jax.jit
 def sync_P_const(freq,spectral_index: float=3.):
@@ -74,9 +74,9 @@ def sync_P_const(freq,spectral_index: float=3.):
     
     consts = freq_irrelavent*(omega*elect_combi)**(0.5-spectral_index/2)*gamma_func_1*gamma_func_2_process
     
-    p = freq*temp_covert
+    #p = freq*temp_covert
     
-    return consts*kpc*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
+    return consts*kpc#*(jnp.exp(p)-1.)**2/(p**2*jnp.exp(p))
 
 @jax.jit
 def sync_emiss_I(freq:float, b_perp: jax.Array,C:jax.Array,spectral_index: float=3.):
