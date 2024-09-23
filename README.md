@@ -27,12 +27,14 @@ We strongly recommend install [JAX](https://jax.readthedocs.io) manually before 
 we currently only supports install from source:
 
 ```bash
-git clone https://github.com/dkn16/synax.git
-cd synax
+git clone https://github.com/dkn16/Synax.git
+cd Synax
 python setup.py install
 ```
 
 pip channel will be constructed later.
+
+Note some examples in the document might require extra inference library such as [`blackjax`](https://blackjax-devs.github.io/blackjax/) and [`optax`](https://optax.readthedocs.io/en/latest/).
 
 ## Basic example
 
