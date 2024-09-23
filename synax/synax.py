@@ -34,7 +34,7 @@ def sync_I_const(freq,spectral_index: float=3.):
        spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
 
     Returns:
-       (jax.Array): parallel emissivity for the synchrotron emission.
+       (jax.Array): parallel emissivity constant for the synchrotron emission.
     """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
@@ -61,7 +61,7 @@ def sync_P_const(freq,spectral_index: float=3.):
        spectral_index (float or jax.Array): spectrum of cosmic ray electron spectrum.
 
     Returns:
-       (jax.Array): perpenndicular emissivity for the polarized synchrotron emission.
+       (jax.Array): perpenndicular emissivity constant for the polarized synchrotron emission.
     """
     
     gamma_func_1 = jax.scipy.special.gamma(spectral_index/4.-1/12.)
