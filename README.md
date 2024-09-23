@@ -22,6 +22,7 @@
 Read the docs at [synax.readthedocs.io](https://synax.readthedocs.io) for more information, examples and tutorials.
 
 ## Installation
+We strongly recommend install [JAX](https://jax.readthedocs.io) manually before install **synax**, please refer to their documentation for more information.
 
 we currently only supports install from source:
 
