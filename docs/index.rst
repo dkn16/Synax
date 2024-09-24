@@ -12,7 +12,7 @@ Welcome to **synax**'s documentation!
 **synax** is a Python package designed to simulate Galactic synchrotron emission, covering both total and polarized intensity. **synax** leverages the capabilities of `JAX <https://jax.readthedocs.io/en/latest/>`_, providing features like automatic differentiation (AD) and support for multiple platforms (CPU, GPU, TPU, etc.). With access to gradients, **Synax** can seamlessly integrate into the broader **JAX** ecosystem, enabling the use of efficient inference algorithms such as Hamiltonian Monte Carlo and ADAM optimization.
 
 
-.. figure:: figures/haslam_opt.pdf
+.. figure:: figures/haslam_opt.jpg
    :alt: Optimized haslam map
    :align: center
 
