@@ -14,6 +14,7 @@ build:
     post_checkout:
       - cp examples/*.ipynb docs/nb/
       - cp figures/*.pdf docs/figures/
+      - cp figures/*.jpg docs/figures/
     # You can also specify other tool versions:
     # nodejs: "19"
     # rust: "1.64"
