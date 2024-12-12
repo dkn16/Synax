@@ -72,7 +72,7 @@ research. The BibTeX entries for the paper is:
 
 .. code-block:: none
 
-      @ARTICLE{2024arXiv241001136D,
+@ARTICLE{2024arXiv241001136D,
          author = {{Diao}, Kangning and {Li}, Zack and {Grumitt}, Richard D.~P. and {Mao}, Yi},
          title = "{$\texttt{synax}$: A Differentiable and GPU-accelerated Synchrotron Simulation Package}",
          journal = {arXiv e-prints},
