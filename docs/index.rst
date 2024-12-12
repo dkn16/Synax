@@ -68,7 +68,9 @@ Attribution & Citation
 ======================
 
 Please cite the following if you find this code useful in your
-research. The BibTeX entries for the paper is::
+research. The BibTeX entries for the paper is:
+
+.. code-block:: none
 
     @ARTICLE{2024arXiv241001136D,
        author = {{Diao}, Kangning and {Li}, Zack and {Grumitt}, Richard D.~P. and {Mao}, Yi},
