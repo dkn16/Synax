@@ -84,7 +84,22 @@ sync['I'],sync['Q'],sync['U'] #I,Q,U maps, respectively
 Please cite the following papers if you found this code useful in your research:
 
 ```bash
-To be submitted soon
+@ARTICLE{2024arXiv241001136D,
+       author = {{Diao}, Kangning and {Li}, Zack and {Grumitt}, Richard D.~P. and {Mao}, Yi},
+        title = "{$\texttt{synax}$: A Differentiable and GPU-accelerated Synchrotron Simulation Package}",
+      journal = {arXiv e-prints},
+     keywords = {Astrophysics - Instrumentation and Methods for Astrophysics, Astrophysics - Astrophysics of Galaxies},
+         year = 2024,
+        month = oct,
+          eid = {arXiv:2410.01136},
+        pages = {arXiv:2410.01136},
+          doi = {10.48550/arXiv.2410.01136},
+archivePrefix = {arXiv},
+       eprint = {2410.01136},
+ primaryClass = {astro-ph.IM},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2024arXiv241001136D},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
 ```
 
 # Licence
