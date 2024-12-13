@@ -7,6 +7,7 @@ import numpy as np
 from functools import partial
 import scipy.constants as const
 from typing import List, Tuple, Union,Dict
+jax.config.update("jax_enable_x64", True)
 
 q_converter = 1/(4*np.pi*const.epsilon_0)**0.5
 

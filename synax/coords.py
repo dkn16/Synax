@@ -5,6 +5,7 @@ import numpy as np
 import healpy as hp
 from functools import partial
 import scipy.constants as const
+jax.config.update("jax_enable_x64", True)
 # obtaining integration locations
 @partial(jax.jit, static_argnums=(2,3,4,5,6,7))
 def obtain_positions(theta,phi,obs_coord:tuple[float] = (-8.3,0.,0.006),x_length:float=20,y_length:float=20,z_length:float=5,num_int_points:int=512,epsilon:float=1e-7):
