@@ -302,7 +302,7 @@ class B_grid():
         Returns:
             jnp.Array of shape (``coords[0].shape``,3). ``coords`` is the parameter of your B_grid instance.
         """
-        return self.field_calc(self.pos,B_field_grid).reshape(self.shape+(3,))
+        return self.field_calc(self.pos,B_field_grid).reshape(self.shape(3,))
     
     def __str__(self):
         """
