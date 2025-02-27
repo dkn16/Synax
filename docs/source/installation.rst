@@ -6,6 +6,15 @@ Dependencies
 
 **synax** depends on ``jax``, ``numpy``, ``scipy``, ``healpy``, ``interpax``. We strongly recommend install ``jax`` manually following `their documentation <https://jax.readthedocs.io/en/latest/installation.html/>`_ first, so that you can install the version that fits your platform.
 
+Specifically, you can install the dependencies using the following command:
+
+.. code-block:: bash
+      
+      pip install numpy scipy healpy
+      pip install 'jax[cpu]==0.4.34'  # or 'jax[cuda12]' if you have a  NVidia GPU
+      pip install interpax
+
+There're currently compatibility issues with ``jax`` and ``interpax``. We recommend using ``jax==0.4.43``.
 
 From PyPi
 ------------------
