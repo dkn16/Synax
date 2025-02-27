@@ -15,7 +15,7 @@ sys.path.insert(0, os.path.abspath('../examples/'))
 project = 'synax'
 copyright = '2024, Kangning Diao, Zack Li, Richard D.P. Grumitt'
 author = 'Kangning Diao, Zack Li, Richard D.P. Grumitt'
-release = '0.1.0'
+release = '0.1.1'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

@@ -1,3 +1,4 @@
+Sphinx==8.1.*
 furo
 numpy
 scipy
